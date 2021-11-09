@@ -5,16 +5,17 @@ class Product{
   int? unitPrice;
 
   Product({required this.name, required this.description, required this.unitPrice});
-  Product.withId({this.id, this.name, this.description, this.unitPrice});
+  Product.withId({required this.id, required this.name, required this.description, required this.unitPrice});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
-    map["name"] = name.toString();
-    map["description"] = description.toString();
-    map["unitPrice"] = int.tryParse(unitPrice.toString());
     if(id != null) {
       map["id"] = int.tryParse(id.toString());
     }
+    map["name"] = name.toString();
+    map["description"] = description.toString();
+    map["unitPrice"] = int.tryParse(unitPrice.toString());
+
     return map;
   }
 

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:sqflite_demo/data/dbhelper.dart';
 import 'package:sqflite_demo/models/product.dart';
 
-class ProductAdd extends StatefulWidget{
+class ProductAdd extends StatefulWidget {
   const ProductAdd({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-   return ProductAddState();
+    return ProductAddState();
   }
-
 }
 
-class ProductAddState extends State{
+class ProductAddState extends State {
   var dbHelper = DbHelper();
 
   var txtName = TextEditingController();
@@ -63,14 +62,27 @@ class ProductAddState extends State{
   buildSaveButton() {
     return ElevatedButton(
       child: const Text("Ekle"),
-      onPressed: (){
+      onPressed: () {
         addProduct();
-        },
+      },
     );
   }
 
   addProduct() async {
-    var result = await dbHelper.insert(Product(name: txtName.text.toString(), description: txtDescription.text.toString(), unitPrice: int.tryParse(txtUnitPrice.text)));
-    Navigator.pop(context, result);
+    var result = await dbHelper.insert(Product(
+        name: txtName.text.toString(),
+        description: txtDescription.text.toString(),
+        unitPrice: int.tryParse(txtUnitPrice.text)));
+    bool? result2;
+    if (result != 0) {
+      result2 = true;
+    } else if (result != 1) {
+      result2 = false;
+    } else {
+      result2 = null;
+    }
+    setState(() {
+      Navigator.pop(context, result2);
+    });
   }
 }
