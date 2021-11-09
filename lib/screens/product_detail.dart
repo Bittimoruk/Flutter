@@ -8,10 +8,8 @@ class ProductDetail extends StatefulWidget {
   ProductDetail(this.product, {Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _ProductDetailState(product);
+  State<StatefulWidget> createState() => _ProductDetailState(product);
   }
-}
 
 enum Options { delete, update }
 
